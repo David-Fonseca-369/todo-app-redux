@@ -1,4 +1,11 @@
 <header class="header">
   <h1>To Do</h1>
-  <input class="new-todo"  placeholder="¿Qué quieres hacer?" autofocus />
+  <!-- Como se asigna a una propiedad de la clase se pone en corchetes [formControl] -->
+  <input
+    class="new-todo"
+    placeholder="¿Qué quieres hacer?"
+    autofocus
+    [formControl]="txtInput"
+    (keyup.enter)="agregar()"
+  />
 </header>
