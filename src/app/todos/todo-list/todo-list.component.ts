@@ -15,6 +15,8 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit(): void {
     //Cada que se reciba un cambio, vamos a estar suscritos y se actualiza la propiedad 'todos'
-    this.store.select('todos').subscribe((todos) => (this.todos = todos));
+    this.store.select('todos').subscribe((todos) => {
+      this.todos = todos;
+    });
   }
 }

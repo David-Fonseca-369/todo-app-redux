@@ -38,7 +38,7 @@ const _todoReducer = createReducer(
         return {
           //operador spread |  copiar sus elementos en otro array o pasarlos como argumentos a una función
           ...todo, //extrae el resto de los elementos, pero deja lo opuesto de completado
-          text: texto,
+          texto: texto,
         };
       } else {
         return todo;
