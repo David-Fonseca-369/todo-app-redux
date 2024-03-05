@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { Todo } from './models/todo.model';
-import { crear } from './todo.actions';
+import { crear, editar, toggle } from './todo.actions';
 
 export const estadoInicial: Todo[] = [
   new Todo('Primera tarea'),
   new Todo('Segunda tarea'),
-  new Todo('Tercera tarea')
+  new Todo('Tercera tarea'),
 ];
 
 const _todoReducer = createReducer(
@@ -13,7 +13,38 @@ const _todoReducer = createReducer(
   //No se recomienda hacer el push directamente ya que se podría mutar el estado
   //Se hace esto para extraer cada elemento de manera independiente del state y se agrega uno nuevo
   //siempre debemos retornar un nuevo estado y prevenir la mutación de ese objeto
-  on(crear, (state, { texto }) => [...state, new Todo(texto)])
+  on(crear, (state, { texto }) => [...state, new Todo(texto)]),
+  on(toggle, (state, { id }) => {
+    //EL map, retorna un nuevo arreglo, es parecido a un foreach, lo que hace es iterar cada uno de los elementos y los transforma y devuelve un
+    //nuevo arreglo
+    return state.map((todo) => {
+      if (todo.id === id) {
+        return {
+          //operador spread |  copiar sus elementos en otro array o pasarlos como argumentos a una función
+          ...todo, //extrae el resto de los elementos, pero deja lo opuesto de completado
+          completado: !todo.completado,
+        };
+      } else {
+        return todo;
+      }
+    });
+  }),
+
+  on(editar, (state, { id, texto }) => {
+    //EL map, retorna un nuevo arreglo, es parecido a un foreach, lo que hace es iterar cada uno de los elementos y los transforma y devuelve un
+    //nuevo arreglo
+    return state.map((todo) => {
+      if (todo.id === id) {
+        return {
+          //operador spread |  copiar sus elementos en otro array o pasarlos como argumentos a una función
+          ...todo, //extrae el resto de los elementos, pero deja lo opuesto de completado
+          text: texto,
+        };
+      } else {
+        return todo;
+      }
+    });
+  })
 );
 
 export function todoReducer(state: any, action: any) {
