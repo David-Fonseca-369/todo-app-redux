@@ -6,7 +6,7 @@
     <!-- Para controlar el evento doble clic en un elemento -->
     <label (dblclick)="editar()">{{ todo.texto }}</label>
 
-    <button class="destroy"></button>
+    <button class="destroy" (click)="borrar()"></button>
   </div>
   <!-- (blur) se ejecuta cuando el input pierde el foco -->
   <!-- Unna referencia local es con el # -->

@@ -55,12 +55,16 @@ export class TodoItemComponent implements OnInit {
     }
 
     //si no hizo ninguna modificación
-    if(this.txtInput.value === this.todo.texto){
+    if (this.txtInput.value === this.todo.texto) {
       return;
     }
 
     this.store.dispatch(
       actions.editar({ id: this.todo.id, texto: this.txtInput.value })
     );
+  }
+
+  borrar() {
+    this.store.dispatch(actions.borrar({ id: this.todo.id }));
   }
 }
