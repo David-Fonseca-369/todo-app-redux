@@ -17,3 +17,7 @@ export const editar = createAction(
 );
 
 export const borrar = createAction('[TODO] Borrar To Do', props<{ id: number }>());
+
+export const limpiarCompletados = createAction('[TODO] Limpiar completados To Do')
+
+export const toggleAll = createAction('[TODO] Toggle All To DO', props<{completado : boolean}>());

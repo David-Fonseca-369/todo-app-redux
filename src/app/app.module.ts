@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 //Importamos los formularios reactivos
-import { ReactiveFormsModule } from "@angular/forms";
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 //NGRX
 //npm i @ngrx/store --save
 import { StoreModule } from '@ngrx/store';
-import { todoReducer } from './todos/todo.reducer';
+import { appReducers } from './todos/app.state';
 
 //npm i @ngrx/store-devtools --save
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -31,11 +30,11 @@ import { environment } from '../environments/environment';
     TodoModule,
 
     //Daba un error al querer asignarle un valor a una propiedad this.todo!.completado = true; y con lo del runtimeChecks, se solucionó
-    StoreModule.forRoot({ todos: todoReducer }, {
+    StoreModule.forRoot(appReducers, {
       runtimeChecks: {
         strictStateImmutability: false,
-        strictActionImmutability: false
-      }
+        strictActionImmutability: false,
+      },
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, //Retains last 25 states
